@@ -25,12 +25,33 @@ function Inmates() {
     inmateDeposit: "",
   });
 
-  const handleInputChange = (event: any) => {
+  // const handleInputChange = (event: any) => {
+  //   setFormValues((prevInputValues) => ({
+  //     ...prevInputValues,
+  //     [event.target.name]: event.target.value,
+  //   }));
+  // };
+
+  const handleInputChange = (event : any) => {
+    const { name, value } = event.target;
+    let formattedValue = value; 
+  
+    if (name === 'inmateDOB' || name === 'inamteDOA' || name === 'inmateDOL') {
+     
+      const dateComponents = value.split('-');
+      if (dateComponents.length === 3) {
+        const [year, month, day] = dateComponents;
+
+        formattedValue = `${day}-${month}-${year}`;
+      }
+    }
+  
     setFormValues((prevInputValues) => ({
       ...prevInputValues,
-      [event.target.name]: event.target.value,
+      [name]: formattedValue,
     }));
   };
+  
 
   const handleSubmit = (event: any) => {
     console.log(formValues);
